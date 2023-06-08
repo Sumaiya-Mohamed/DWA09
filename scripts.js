@@ -1,16 +1,9 @@
 import {BookPreview} from "./book-preview.js"
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
-import { html, ElementsUtils, previewElements, optionElements } from './helper-classes.js';
+import { html, optionElements } from './helper-classes.js';
 
 let page = 1;
 let matches = books
-
-/*books.forEach((book) => {
-    const previewElement = previewElements.createPreviewElement(book);
-    html.main.booksDiv.appendChild(previewElement);
-  });
-*/
-
 
 
   //This part of the code deals with the genre options and adds them to the 
@@ -224,7 +217,7 @@ html.settings.form.addEventListener('submit', handleThemeSettings)
 html.main.loadMoreButton.addEventListener('click', loadMoreBooks)
 
 // The code below handles displaying the active book's information.
-   /*html.main.booksDiv.addEventListener('click', (event) => {
+   html.main.booksDiv.addEventListener('click', (event) => {
     const pathArray = Array.from(event.path || event.composedPath())
     let active = null
 
@@ -251,4 +244,4 @@ html.main.loadMoreButton.addEventListener('click', loadMoreBooks)
         html.bookPreview.Subtitle.innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})`
         html.bookPreview.description.innerText = active.description
     }
-})*/
+})

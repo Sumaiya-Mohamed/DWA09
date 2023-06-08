@@ -90,16 +90,6 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js';
  
 
 
-
-// Helper function to create an element with attributes and innerHTML - take this out and import it to this file.
-/*export function createElementWithAttributes( tag, attributes, innerHTML) {
-    const element = document.createElement(tag);
-    for (const [key, value] of Object.entries(attributes)) {
-      element.setAttribute(key, value);
-    }
-    element.innerHTML = innerHTML;
-    return element;
-  }*/
  
 //This class creates the element with it's corresponding attributes and innerHtml
   export class ElementsUtils {
@@ -114,25 +104,9 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js';
   }
 }
  
- // Helper function to create preview elements
-  /*export function createPreviewElement(book) {
-    const { author, id, image, title } = book;
-    const element = createElementWithAttributes('button', {
-      class: 'preview',
-      'data-preview': id,
-    });
-    element.innerHTML = `
-      <img class="preview__image" src="${image}" />
-      <div class="preview__info">
-        <h3 class="preview__title">${title}</h3>
-        <div class="preview__author">${authors[author]}</div>
-      </div>
-    `;
-    return element;
-  }*/
  
 //Class to create preview elements.
- export class previewElements{
+/* export class previewElements{
   static createPreviewElement(book){
     const {author, id, image, title } = book;
     const element = ElementsUtils.createElementsWithAttributes('button',{
@@ -150,7 +124,7 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js';
       `
     return element 
   }
- }
+ }*/
 
 
   // Helper function to create option elements

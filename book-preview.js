@@ -66,10 +66,11 @@ export class BookPreview extends HTMLElement {
       .preview__author {
         color: rgba(var(--color-dark), 0.4);
       }
+        
       </style>
 
       <button class="preview" type="button">
-        <img class="preview__image" src="" alt="Book Cover" />
+        <img class="preview__image" src="" />
         <div class="preview__info">
           <h3 class="preview__title"></h3>
           <div class="preview__author"></div>
@@ -80,31 +81,16 @@ export class BookPreview extends HTMLElement {
 
   connectedCallback() {
     // Retrieve the book data from the element's attributes
-    const bookId = this.dataset.bookId;
+    const bookId = this.getAttribute('data-bookId');
 
     // Retrieve the book details from the books object
     const book = books[bookId];
 
     if (book) {
       // Update the content of the book preview
-      const previewButton = this.shadowRoot.querySelector('.preview');
-      const previewImage = this.shadowRoot.querySelector('.preview__image');
-      const previewTitle = this.shadowRoot.querySelector('.preview__title');
-      const previewAuthor = this.shadowRoot.querySelector('.preview__author');
-
-      previewButton.setAttribute('data-bookId', bookId);
-      previewImage.src = book.image;
-      previewTitle.textContent = book.title;
-      previewAuthor.textContent = authors[book.author];
-
-      previewButton.addEventListener('click', () => {
-        html.bookPreview.overlay.open = true;
-        html.bookPreview.overlay.Blur.src = book.image;
-        html.bookPreview.overlay.Image.querySelector('img').src = book.image;
-        html.bookPreview.overlay.Title.textContent = book.title;
-        html.bookPreview.overlay.Subtitle.textContent = `${authors[book.author]} (${new Date(book.published).getFullYear()})`;
-        html.bookPreview.overlay.Description.textContent = book.description;
-      });
+      this.shadowRoot.querySelector('.preview__image').src = book.image;
+      this.shadowRoot.querySelector('.preview__title').textContent = book.title;
+      this.shadowRoot.querySelector('.preview__author').textContent = authors[book.author];
     }
   }
 }
@@ -118,33 +104,8 @@ for (const bookId in books) {
   const bookPreview = document.createElement('book-preview');
 
   // Set the bookId attribute for the element
-  bookPreview.dataset.bookId = bookId;
+  bookPreview.setAttribute('data-bookId', bookId);
 
   // Append the element to the document body or any other container element
   html.main.booksDiv.appendChild(bookPreview);
 }
-
-// Add event listener to the booksDiv element
-html.main.booksDiv.addEventListener('click', (event) => {
-  const pathArray = Array.from(event.path || event.composedPath());
-  let active = null;
-
-  for (const node of pathArray) {
-    if (active) break;
-
-    if (node?.dataset?.bookId) {
-      const bookId = node.dataset.bookId;
-      active = books[bookId];
-    }
-  }
-
-  if (active) {
-    html.bookPreview.overlay.open = true;
-    html.bookPreview.overlay.Blur.src = book.image;
-    html.bookPreview.overlay.Image.src = book.image;
-    html.bookPreview.overlay.Title.textContent = book.title;
-    html.bookPreview.overlay.Subtitle.textContent = `${authors[book.author]} (${new Date(book.published).getFullYear()})`;
-    html.bookPreview.overlay.Description.textContent = book.description;
-  }
-
-})
