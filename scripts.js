@@ -6,6 +6,8 @@ let page = 1;
 let matches = books
 
 
+
+
   //This part of the code deals with the genre options and adds them to the 
 //select field and also adds the All genres option.
 const genreHtml = document.createDocumentFragment();

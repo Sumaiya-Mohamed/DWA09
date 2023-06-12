@@ -79,9 +79,11 @@ export class BookPreview extends HTMLElement {
     `;
   }
 
+ 
+  
   connectedCallback() {
     // Retrieve the book data from the element's attributes
-    const bookId = this.getAttribute('data-bookId');
+    const bookId = this.getAttribute('data-bookId', this.id);
 
     // Retrieve the book details from the books object
     const book = books[bookId];
@@ -91,8 +93,16 @@ export class BookPreview extends HTMLElement {
       this.shadowRoot.querySelector('.preview__image').src = book.image;
       this.shadowRoot.querySelector('.preview__title').textContent = book.title;
       this.shadowRoot.querySelector('.preview__author').textContent = authors[book.author];
-    }
+      this.shadowRoot.querySelector('.preview').addEventListener('click', () =>{
+      html.bookPreview.overlay.show()
+      html.bookPreview.Image.src = book.image
+      html.bookPreview.Blur.src = book.image
+      html.bookPreview.Title.textContent = book.title
+      html.bookPreview.Subtitle.textContent = book.Subtitle
+      html.bookPreview.description.textContent = book.description
+    })
   }
+}
 }
 
 // Define the custom element
